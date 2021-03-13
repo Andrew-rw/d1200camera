@@ -22,7 +22,7 @@ The package contains the only node - **mynteye_d1200_node**.
 * **points_frame** - (string) Points TF frame name. Default - "points_frame"
 
 # Dependencies
-The package depends on Mynt Eye D library and pcl-ros package.
+The package depends on Mynt Eye D library and ROS pcl-ros, image_transport, cv_bridge packages.
 
 # Installation
 1) Download and install MYNT-EYE-D-SDK (https://github.com/slightech/MYNT-EYE-D-SDK)
