@@ -40,18 +40,13 @@
     <arg name="namespace" default="rtabmap"/>
     <arg name="wait_for_transform" default="0.5"/>
 
-    <node pkg="d1200camera" type="mynteye_d1200_node" name="mynteye_d1200_node">
-        <param name="rgb_topic" value="/camera_color" />
-        <param name="depth_topic" value="/camera_depth" />
-        <!-- <param name="points_topic" value="/points" /> -->
-        <param name="ir_intensity" value="0" />
-        <param name="camera_factor" value="500.0" />
-        <param name="low_resolution" value="false" />
-    </node>
-
-    <node pkg="tf" type="static_transform_publisher" name="base_to_points_broadcaster" args="0.0 0 0.0 0 0 0 base_link points_frame 1000" />
-    <node pkg="tf" type="static_transform_publisher" name="base_to_color_broadcaster" args="0.0 0 0.0 0 0 -$(arg pi/2) base_link color_frame 1000" />
-    <node pkg="tf" type="static_transform_publisher" name="base_to_depth_broadcaster" args="0 0 0 0 0 -$(arg pi/2) base_link depth_frame 1000" />
+    <include file="$(find d1200camera)/launch/d1200_camera.launch">
+        <arg name="rgb_topic" value="/camera_color" />
+        <arg name="depth_topic" value="/camera_depth" />
+        <arg name="ir_intensity" value="0" />
+        <arg name="camera_factor" value="500.0" />
+        <arg name="low_resolution" value="false" />
+    </include>
 
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
         <arg name="rtabmapviz" value="$(arg rtabmapviz)" />
