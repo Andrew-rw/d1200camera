@@ -1,0 +1,30 @@
+<launch>
+    <arg name="pi/2" value="1.5707963267948966" />
+    <arg name="pi" value="3.1415926" />
+    <arg name="rgb_topic" default="/camera_color" />
+    <arg name="depth_topic" default="/camera_depth" />
+    <!-- <arg name="points_topic" default="/points" /> -->
+    <arg name="points_topic" default="" />
+    <arg name="ir_intensity" default="0" />
+    <arg name="camera_factor" default="500.0" />
+    <arg name="low_resolution" default="false" />
+    <arg name="gui" default="True" />
+    
+    
+    <node pkg="d1200camera" type="mynteye_d1200_node" name="mynteye_d1200_node">
+        <param name="rgb_topic" value="$(arg rgb_topic)" />
+        <param name="depth_topic" value="$(arg depth_topic)" />
+        <param name="points_topic" value="$(arg points_topic)" />
+        <param name="ir_intensity" value="$(arg ir_intensity)" />
+        <param name="camera_factor" value="$(arg camera_factor)" />
+        <param name="low_resolution" value="$(arg low_resolution)" />
+    </node>
+    
+    <node pkg="tf" type="static_transform_publisher" name="base_to_points_broadcaster" args="0.0 0 0.0 0 0 0 base_link points_frame 1000" />
+    <node pkg="tf" type="static_transform_publisher" name="base_to_color_broadcaster" args="0.0 0 0.0 0 0 -$(arg pi/2) base_link color_frame 1000" />
+    <node pkg="tf" type="static_transform_publisher" name="base_to_depth_broadcaster" args="0 0 0 0 0 -$(arg pi/2) base_link depth_frame 1000" />
+
+        
+    <node if="$(arg gui)" name="rviz" pkg="rviz" type="rviz" args="-d $(find d1200camera)/launch/config/basic-view.rviz" required="true"/>
+
+</launch>
