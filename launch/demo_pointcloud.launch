@@ -9,6 +9,7 @@
         <arg name="ir_intensity" value="0" />
         <arg name="camera_factor" value="500.0" />
         <arg name="low_resolution" value="false" />
+        <arg name="gui" value="false" />
     </include>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find d1200camera)/launch/config/basic-view.rviz" required="true"/>
