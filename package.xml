@@ -4,11 +4,11 @@
   <version>0.0.0</version>
   <description>TPackage for the MYNT EYE D1200 Depth camera</description>
 
-  <maintainer email="placeholder@a.com">Robotics Weekends</maintainer>
+  <maintainer email="robotics.weekends@gmail.com">Robotics Weekends</maintainer>
 
   <license>Slightech License</license>
 
-  <author email="placeholder@a.com">Robotics Weekends</author>
+  <author email="robotics.weekends@gmail.com">Robotics Weekends</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 

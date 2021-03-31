@@ -13,16 +13,16 @@ The package contains the only node - **mynteye_d1200_node**.
 
 * **rgb_topic** - (string) RGB image stream topic name. Default - "/camera_color"
 * **depth_topic** - (string) Depth image stream topic name. Default - "/camera_depth"
-* **points_topic** - (string) Pointcloud stream topic name. Default - "". If the the prameter value is empty or not set, topic publishing is disabled.
+* **points_topic** - (string) Pointcloud stream topic name. Default - "". If the the parameter value is empty or not set, topic publishing is disabled.
 * **ir_intensity** - (int) IR structured light projector intensity. Default - "0". 0 - projector is disabled, 10 - maximum intensity.
 * **camera_factor** - (float) Camera factor. Default - "500.0"
-* **low_resolution** - (bool) Swith camera to low resolution (640x480). High resolution is 1280 720. Default - "false". In low resolution field of view is lower but higher data publish rate.
+* **low_resolution** - (bool) Switch camera to low resolution (640x480). High resolution is 1280 720. Default - "false". In low resolution field of view is lower but higher data publish rate.
 * **rgb_frame** - (string) RGB stream TF frame name. Default - "color_frame"
 * **depth_frame** - (string) Depth stream TF frame name. Default - "depth_frame"
 * **points_frame** - (string) Points TF frame name. Default - "points_frame"
 
 # Dependencies
-The package depends on Mynt Eye D library and pcl-ros package.
+The package depends on Mynt Eye D library and ROS pcl_ros, image_transport, cv_bridge packages.
 
 # Installation
 1) Download and install MYNT-EYE-D-SDK (https://github.com/slightech/MYNT-EYE-D-SDK)
