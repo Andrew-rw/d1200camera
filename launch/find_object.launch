@@ -1,0 +1,43 @@
+<launch>
+    <!-- NOTE: Make sure that find-object-2d package is installed! -->
+
+    <include file="$(find d1200camera)/launch/d1200_camera.launch">
+        <arg name="rgb_topic" value="/camera_color" />
+        <arg name="depth_topic" value="/camera_depth" />
+        <!-- <arg name="points_topic" value="/points" /> -->
+        <arg name="ir_intensity" value="0" />
+        <arg name="camera_factor" value="500.0" />
+        <arg name="low_resolution" value="false" />
+        <arg name="gui" value="false" />
+    </include>
+
+    <!-- Example finding 3D poses of the objects detected -->
+	
+	<node name="find_object_3d" pkg="find_object_2d" type="find_object_2d" output="screen">
+		<param name="gui" value="true" type="bool"/>
+		<param name="settings_path" value="~/.ros/find_object_2d.ini" type="str"/>
+		<param name="subscribe_depth" value="true" type="bool"/>
+		<param name="objects_path" value="" type="str"/>
+		<param name="object_prefix" value="object" type="str"/>
+		
+		<remap from="rgb/image_rect_color" to="/camera_color"/>
+		<remap from="depth_registered/image_raw" to="/camera_depth"/>
+		<remap from="depth_registered/camera_info" to="/camera_info"/>
+	</node>
+	
+	<!-- Example of tf synchronisation with the objectsStamped message -->
+	<node name="tf_example" pkg="find_object_2d" type="tf_example" output="screen">
+		<param name="map_frame_id" value="/map" type="string"/>
+		<param name="object_prefix" value="object" type="str"/>
+	</node>
+	<!-- fake some tf frames for the example /map -> /odom -> /base_link -> /camera_link -->
+	<node pkg="tf" type="static_transform_publisher" name="base_to_camera_tf" 
+		args="0.1 0.0 0.3 0.0 0.0 0.0 /base_link /camera_link 100" />
+	<node pkg="tf" type="static_transform_publisher" name="odom_to_base_tf" 
+		args="1.0 0.0 0.1 1.5707 0.0 0.0 /odom /base_link 100" />
+	<node pkg="tf" type="static_transform_publisher" name="map_to_odom_tf" 
+		args="0.0 0.5 0.0 0.7853 0.0 0.0 /map /odom 100" />
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find d1200camera)/launch/config/basic-view.rviz" required="true"/>
+
+</launch>
