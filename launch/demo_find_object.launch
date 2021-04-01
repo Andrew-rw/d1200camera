@@ -4,9 +4,8 @@
     <include file="$(find d1200camera)/launch/d1200_camera.launch">
         <arg name="rgb_topic" value="/camera_color" />
         <arg name="depth_topic" value="/camera_depth" />
-        <!-- <arg name="points_topic" value="/points" /> -->
+        <arg name="points_topic" value="/points" />
         <arg name="ir_intensity" value="0" />
-        <arg name="camera_factor" value="500.0" />
         <arg name="low_resolution" value="false" />
         <arg name="gui" value="false" />
     </include>
@@ -30,14 +29,12 @@
 		<param name="map_frame_id" value="/map" type="string"/>
 		<param name="object_prefix" value="object" type="str"/>
 	</node>
-	<!-- fake some tf frames for the example /map -> /odom -> /base_link -> /camera_link -->
-	<node pkg="tf" type="static_transform_publisher" name="base_to_camera_tf" 
-		args="0.1 0.0 0.3 0.0 0.0 0.0 /base_link /camera_link 100" />
+	<!-- fake some tf frames for the example /map -> /odom -> /base_link -->
 	<node pkg="tf" type="static_transform_publisher" name="odom_to_base_tf" 
 		args="1.0 0.0 0.1 1.5707 0.0 0.0 /odom /base_link 100" />
 	<node pkg="tf" type="static_transform_publisher" name="map_to_odom_tf" 
 		args="0.0 0.5 0.0 0.7853 0.0 0.0 /map /odom 100" />
 
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find d1200camera)/launch/config/basic-view.rviz" required="true"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find d1200camera)/launch/config/find_object.rviz" required="true"/>
 
 </launch>

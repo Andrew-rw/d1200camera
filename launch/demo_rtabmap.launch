@@ -42,8 +42,7 @@
         <arg name="rgb_topic" value="/camera_color" />
         <arg name="depth_topic" value="/camera_depth" />
         <arg name="ir_intensity" value="0" />
-        <arg name="camera_factor" value="500.0" />
-        <arg name="low_resolution" value="false" />
+        <arg name="low_resolution" default="false" />
         <arg name="gui" value="false" />
     </include>
 

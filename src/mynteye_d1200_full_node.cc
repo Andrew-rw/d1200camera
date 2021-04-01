@@ -30,8 +30,12 @@ float camFactor;
 bool lowRes = false;
 ros::Publisher pointCloudPub;
 
-inline CameraIntrinsics getCameraIntrinsics(const Camera& camera) {
+inline CameraIntrinsics getCameraIntrinsics(const Camera& camera, bool lowRes) {
+  // even if stream_mode is set to STREAM_640x480 intrinsics param contains widthxheight = 1280x720 
   auto stream_mode = camera.GetOpenParams().stream_mode;
+  if (lowRes) {
+    stream_mode = StreamMode::STREAM_640x480;
+  }
   return camera.GetStreamIntrinsics(stream_mode).left;
 }
 
@@ -128,7 +132,7 @@ int main(int argc, char** argv) {
   priv_nh.param<std::string>("points_topic", pointsTopic, "");
   priv_nh.param<std::string>("points_frame", pointsFrame, "points_frame");
   priv_nh.param<bool>("low_resolution", lowRes, false);
-  priv_nh.param<float>("camera_factor", camFactor, 500.0);
+  priv_nh.param<float>("camera_factor", camFactor, 1000.0);
   priv_nh.param("ir_intensity", irIntensity, 0);
 
   image_transport::CameraPublisher pubColor = iTransportMynteye.advertiseCamera(cameraColorTopic, 1);
@@ -169,7 +173,7 @@ int main(int argc, char** argv) {
   }
   std::cout << "Opened " << devInfo.name << " device." << std::endl;
 
-  CameraIntrinsics camIntr = getCameraIntrinsics(cam);
+  CameraIntrinsics camIntr = getCameraIntrinsics(cam, lowRes);
 
   Rate rate(params.framerate);
   // loop

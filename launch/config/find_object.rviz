@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /TF1
         - /TF1/Frames1
       Splitter Ratio: 0.4110580086708069
     Tree Height: 301
@@ -88,24 +89,33 @@ Visualization Manager:
         base_link:
           Value: true
         color_frame:
-          Value: true
+          Value: false
         depth_frame:
+          Value: false
+        map:
+          Value: false
+        object_3:
           Value: true
+        odom:
+          Value: false
         points_frame:
-          Value: true
+          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        base_link:
-          color_frame:
-            {}
-          depth_frame:
-            {}
-          points_frame:
-            {}
+        map:
+          odom:
+            base_link:
+              color_frame:
+                object_3:
+                  {}
+              depth_frame:
+                {}
+              points_frame:
+                {}
       Update Interval: 0
       Value: true
     - Class: rviz/Image
@@ -156,25 +166,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.895430564880371
+      Distance: 3.427978992462158
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.0602513924241066
-        Y: -0.18882013857364655
-        Z: 0.6351795196533203
+        X: 0.5372473001480103
+        Y: -1.165880799293518
+        Z: 0.01043650507926941
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.12479760497808456
+      Pitch: 0.42979732155799866
       Target Frame: map
       Value: Orbit (rviz)
-      Yaw: 3.543168783187866
+      Yaw: 3.943169116973877
     Saved: ~
 Window Geometry:
   Displays:
